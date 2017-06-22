@@ -1,0 +1,23 @@
+# Prometheus Sample Infrastructure
+
+## What to expect
+
+Easy to setup Prometheus sample infrastructure
+
+## Prerequisite
+
+* Docker
+* Docker-Compose
+
+## How to Run
+
+    docker-compose up
+
+## Services in the Sample
+
+* Prometheus (http://localhost:9090)
+* Grafana (http://localhost:3000)
+* Prometheus SpringBoot Minimal Sample (http://localhost:8083)
+* Prometheus Vertx Minimal Sample (http://localhost:8083)
+* Node Exporter (http://localhost:8082)
+* cAdvisor (http://localhost:8083)
