@@ -29,6 +29,8 @@ services:
     image: maven:3.5.0-jdk-8-alpine
     command: mvn compile spring-boot:run
     working_dir: /code
+    environment:
+      MAVEN_OPTS: '-Xmx128m'
     volumes:
       - ./prometheusspringbootminimal:/code
     networks:
@@ -39,6 +41,8 @@ services:
     image: maven:3.5.0-jdk-8-alpine
     command: mvn compile exec:java
     working_dir: /code
+    environment:
+      MAVEN_OPTS: '-Xmx128m'
     volumes:
       - ./prometheusvertxminimal:/code
     networks:
