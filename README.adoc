@@ -46,9 +46,8 @@ Easy to setup Prometheus sample infrastructure
 ## Scrape Configuration
 
 The internal URL is used by prometheus to scrape the targets:
-+
-.prometheus.yml
-[source,indent=0]
+
+[source, yaml, indent=0]
 ----
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
