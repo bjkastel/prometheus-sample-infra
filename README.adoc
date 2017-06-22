@@ -15,9 +15,9 @@ Easy to setup Prometheus sample infrastructure
 
 ## Services in the Sample
 
-* Prometheus (http://localhost:9090)
-* Grafana (http://localhost:3000)
-* Prometheus SpringBoot Minimal Sample (http://localhost:8083)
-* Prometheus Vertx Minimal Sample (http://localhost:8083)
-* Node Exporter (http://localhost:8082)
-* cAdvisor (http://localhost:8083)
+* https://prometheus.io/[Prometheus, window="_blank"] (http://localhost:9090)
+* https://grafana.com/[Grafana, window="_blank"] (http://localhost:3000)
+* https://github.com/ahus1/prometheusspringbootminimal/[Prometheus SpringBoot Minimal Sample, window="_blank"] (http://localhost:8083)
+* https://github.com/ahus1/prometheusvertxminimal/[Prometheus Vertx Minimal Sample, window="_blank"] (http://localhost:8083)
+* https://github.com/prometheus/node_exporter[Node Exporter, window="_blank"] (http://localhost:8082)
+* https://github.com/google/cadvisor[cAdvisor, window="_blank"] (http://localhost:8083)
