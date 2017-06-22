@@ -1,0 +1,6 @@
+[submodule "prometheusspringbootminimal"]
+	path = prometheusspringbootminimal
+	url = git@github.com:ahus1/prometheusspringbootminimal.git
+[submodule "prometheusvertxminimal"]
+	path = prometheusvertxminimal
+	url = git@github.com:ahus1/prometheusvertxminimal.git

@@ -1,0 +1,67 @@
+version: '2'
+networks:
+  backend:
+    external: false
+services:
+  prometheus:
+    image: prom/prometheus:v1.7.1
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus-data
+    networks:
+      - backend
+    ports: 
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:4.3.2
+    environment:
+       GF_SECURITY_ADMIN_PASSWORD: admin
+       GF_ANALYTICS_REPORTING_ENABLED: 'false'
+       GF_USERS_ALLOW_SIGN_UP: 'false'
+       GF_ALLOW_ORG_CREATE: 'false'
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - backend
+    ports:
+      - 3000:3000
+  prometheusspringbootminimal:
+    image: maven:3.5.0-jdk-8-alpine
+    command: mvn compile spring-boot:run
+    working_dir: /code
+    volumes:
+      - ./prometheusspringbootminimal:/code
+    networks:
+      - backend
+    ports:
+      - 8080:8080
+  prometheusvertxminimal:
+    image: maven:3.5.0-jdk-8-alpine
+    command: mvn compile exec:java
+    working_dir: /code
+    volumes:
+      - ./prometheusvertxminimal:/code
+    networks:
+      - backend
+    ports:
+      - 8081:8081
+  node-exporter:
+    image: prom/node-exporter:v0.14.0
+    networks:
+      - backend
+    ports:
+      - 8082:9100
+  cadvisor:
+    image: google/cadvisor:v0.26.1
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - backend
+    ports:
+      - 8083:8080
+volumes:
+  prometheus-data:
+  grafana-data:
