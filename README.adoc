@@ -1,4 +1,4 @@
-# Prometheus Sample Infrastructure
+<# Prometheus Sample Infrastructure
 
 ## What to expect
 
@@ -78,3 +78,13 @@ scrape_configs:
         - 'prometheusvertxminimal:8081'
     metrics_path: /manage/metrics
 ----
+
+## Configure Grafana
+
+Open Grafana (http://localhost:3000).
+Login with User `admin` and Password `admin`
+
+image::images/grafana-createdatasource.png[]
+
+Add a name (1), choose Prometheus as Type (2) and set the URL to `http://prometheus:9090/` (3).
+You have to choose `proxy` as Access (4). After you have added the Datasource (5) you can import a preconfigured Prometheus Dashboard (6).
