@@ -1,4 +1,4 @@
-<# Prometheus Sample Infrastructure
+# Prometheus Sample Infrastructure
 
 ## What to expect
 
