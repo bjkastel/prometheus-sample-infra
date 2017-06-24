@@ -3,6 +3,24 @@ networks:
   backend:
     external: false
 services:
+  influxdb:
+    image: influxdb:1.2
+    volumes:
+      - influx-data:/var/lib/influxdb
+    networks:
+      - backend
+    ports:
+      - 8086:8086
+  remote_storage_adapter:
+    image: golang
+    command: './remote_storage_adapter -influxdb-url=http://influxdb:8086/ -influxdb.database=prometheus -influxdb.retention-policy=autogen'
+    working_dir: /remote_storage_adapter
+    volumes:
+      - ./prometheus_git/documentation/examples/remote_storage/remote_storage_adapter:/remote_storage_adapter
+    networks:
+      - backend
+    ports:
+      - 9201:9201
   prometheus:
     image: prom/prometheus:v1.7.1
     volumes:
@@ -10,7 +28,7 @@ services:
       - prometheus-data:/prometheus-data
     networks:
       - backend
-    ports: 
+    ports:
       - 9090:9090
   grafana:
     image: grafana/grafana:4.3.2
@@ -69,3 +87,4 @@ services:
 volumes:
   prometheus-data:
   grafana-data:
+  influx-data:

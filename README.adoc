@@ -15,6 +15,9 @@ Easy to setup Prometheus sample infrastructure
     git clone https://github.com/bjkastel/prometheus-sample-infra.git
     git submodule init
     git submodule update
+    docker run --rm -it -v $(pwd)/prometheus_git:/go/src/github.com/prometheus/prometheus -w /go/src/github.com/prometheus/prometheus/documentation/examples/remote_storage/remote_storage_adapter golang go build -v
+    docker-compose up influxdb
+    docker-compose exec influxdb influx -execute 'create database prometheus'
     docker-compose up -d
 
 ## Services in the Sample
