@@ -29,6 +29,14 @@ Easy to setup Prometheus sample infrastructure
 | http://prometheus:9090
 | http://localhost:9090
 
+| https://github.com/influxdata/influxdb/[InfluxDB]
+| http://influxdb:8086
+| http://localhost:8086
+
+| https://github.com/prometheus/prometheus/tree/master/documentation/examples/remote_storage/remote_storage_adapter/[Remote Storage Adapter]
+| http://remote_storage_adapter:9201
+| http://localhost:9201
+
 | https://grafana.com/[Grafana]
 | http://grafana:3000
 | http://localhost:3000
