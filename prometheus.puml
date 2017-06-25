@@ -1,0 +1,65 @@
+@startuml
+skinparam componentStyle uml2
+
+actor Operator #lightgreen
+actor "Application User" as User #lightblue
+
+node "local os" {
+    package "Prometheus Monitoring" #lightgreen {
+        [Grafana] <<Docker>>
+        () "Grafana HTTP (3000)" as GrafanaHttp
+        GrafanaHttp <-- Grafana : http
+
+        [Prometheus] <<Docker>>
+        () "Prometheus HTTP (9090)" as PrometheusHttp
+        PrometheusHttp <-- Prometheus : http
+
+        [Node Exporter] <<Docker>> as NodeExporter
+        note top of NodeExporter
+            A node_exporter should probably be used
+            as a native component on the infrastructure
+            node instead of a <<Docker>> container
+        end note
+        () "NodeExporter HTTP (8082)" as NodeExporterHttp
+        NodeExporterHttp <-- NodeExporter : http
+
+        [CAdvisor] <<Docker>> as CAdvisor
+        () "CAdvisor HTTP (8083)" as CAdvisorHttp
+        CAdvisorHttp <-- CAdvisor : http
+
+        CAdvisorHttp <-up- Prometheus : pull /metrics
+        NodeExporterHttp <-up- Prometheus : pull /metrics
+        Grafana <-- PrometheusHttp : pull
+    }
+
+
+    package "System(s) under Observation" #lightblue {
+        [SpringBoot Minimal] <<Docker>> as SpringBootMinimal
+        () "SpringBoot Minimal HTTP (8080)" as SpringBootMinimalHttp
+        SpringBootMinimalHttp <-- SpringBootMinimal : http
+
+        [Vertx Minimal] <<Docker>> as VertxMinimal
+        () "Vertx Minimal HTTP (8081)" as VertxMinimalHttp
+        VertxMinimalHttp <-- VertxMinimal : http
+    }
+
+    () KernelMetrics #red
+    [Docker Daemon] as Docker #red
+    Docker -up-> SpringBootMinimal : run
+    Docker -up-> VertxMinimal : run
+
+    CAdvisor --> Docker : /pull
+    NodeExporter --> KernelMetrics : /pull
+
+    Prometheus --> SpringBootMinimalHttp : pull /prometheus
+    Prometheus --> VertxMinimalHttp : pull /manage/metrics
+}
+
+Operator --> GrafanaHttp : use
+Operator --> PrometheusHttp : use
+Operator --> CAdvisorHttp : use
+Operator --> NodeExporterHttp : use
+User -down-> SpringBootMinimalHttp : use
+User -down-> VertxMinimalHttp : use
+
+@enduml
