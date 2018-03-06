@@ -27,6 +27,7 @@ scrape_configs:
       - targets: 
         - 'node-exporter:9100'
         - 'cadvisor:8080'
+        - 'grafana:3000'
 
   - job_name: 'prometheusspringbootminimal'
     static_configs:
