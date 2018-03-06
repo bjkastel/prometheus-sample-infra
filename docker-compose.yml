@@ -4,7 +4,7 @@ networks:
     external: false
 services:
   prometheus:
-    image: prom/prometheus:v1.7.1
+    image: prom/prometheus:v2.1.0
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus-data
@@ -13,7 +13,7 @@ services:
     ports: 
       - 9090:9090
   grafana:
-    image: grafana/grafana:4.3.2
+    image: grafana/grafana:5.0.0
     environment:
        GF_SECURITY_ADMIN_PASSWORD: admin
        GF_ANALYTICS_REPORTING_ENABLED: 'false'
@@ -50,13 +50,13 @@ services:
     ports:
       - 8081:8081
   node-exporter:
-    image: prom/node-exporter:v0.14.0
+    image: prom/node-exporter:v0.15.2
     networks:
       - backend
     ports:
       - 8082:9100
   cadvisor:
-    image: google/cadvisor:v0.26.1
+    image: google/cadvisor:v0.29.0
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
