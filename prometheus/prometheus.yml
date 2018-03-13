@@ -40,3 +40,9 @@ scrape_configs:
       - targets: 
         - 'prometheusvertxminimal:8081'
     metrics_path: /manage/metrics
+
+  - job_name: 'particle-prom-gw'
+    static_configs:
+      - targets: 
+        - 'particle-prom-gw:8090'
+

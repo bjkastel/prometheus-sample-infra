@@ -3,6 +3,12 @@ networks:
   backend:
     external: false
 services:
+  web:
+    image: httpd:2.4
+    volumes:
+      - ./web:/usr/local/apache2/htdocs/
+    ports: 
+      - 80:80
   prometheus:
     image: prom/prometheus:v2.1.0
     volumes:
@@ -67,6 +73,15 @@ services:
       - backend
     ports:
       - 8083:8080
+  particle-prom-gw:
+    image: alpine:latest
+    volumes:
+      - ./particle-prom-gw/particle-prom-gw:/particle-prom-gw
+    entrypoint: ./particle-prom-gw
+    networks:
+      - backend
+    ports:
+      - 8090:8090
 volumes:
   prometheus-data:
   grafana-data:
