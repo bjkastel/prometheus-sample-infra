@@ -47,6 +47,11 @@ Easy to setup Prometheus sample infrastructure
 | http://localhost:8083
 |===
 
+[plantuml, "Prometheus Sample", png]
+----
+include::prometheus.puml[]
+----
+
 ## Scrape Configuration
 
 The internal URL is used by prometheus to scrape the targets:
